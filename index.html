@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>唐斌的GPTs</title>
+  <style>
+    :root {
+      --bg: #f7f2ea;
+      --bg-soft: #f3ece2;
+      --card: #ffffff;
+      --text: #3f342c;
+      --text-soft: #6f6358;
+      --line: #ddd2c4;
+      --line-strong: #d8cfc3;
+      --accent: #57493f;
+      --accent-soft: #bfae9c;
+      --muted: #8a7b6d;
+      --shadow: 0 10px 30px rgba(87, 73, 63, 0.08);
+      --radius-lg: 28px;
+      --radius-md: 24px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(247, 242, 234, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1px solid #b8aa98;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    .nav a {
+      font-size: 14px;
+      font-weight: 600;
+      color: #5f5246;
+    }
+
+    .nav a:hover { color: #000; }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .section.alt {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-soft);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+      padding: 88px 0;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid #cabaa8;
+      color: #78695e;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      max-width: 640px;
+      color: var(--text-soft);
+      font-size: 17px;
+      margin: 22px 0 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--accent);
+      border-color: var(--accent-soft);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero-card,
+    .card {
+      background: var(--card);
+      border: 1px solid #dccfc0;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card .placeholder {
+      aspect-ratio: 4 / 3;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #7a6e63;
+      background: linear-gradient(135deg, #e8ddcf, #f8f4ef);
+      padding: 24px;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 36px;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      color: var(--text-soft);
+      max-width: 760px;
+      margin: 0 0 32px;
+      font-size: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: var(--radius-md);
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.3;
+    }
+
+    .card p {
+      margin: 14px 0 0;
+      color: var(--text-soft);
+      font-size: 15px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 16px;
+      color: #5e5248;
+      font-size: 15px;
+    }
+
+    .history-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .history-no {
+      color: #9a887a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .media-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    audio, video {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    video {
+      border-radius: 18px;
+      border: 1px solid #e4d9cc;
+      background: #000;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .contact-lines p {
+      margin: 0 0 10px;
+      color: #5f5348;
+      font-size: 15px;
+    }
+
+    .form-card {
+      background: #fff;
+      border: 1px solid #dccfc0;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid #dacdbf;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #7b6a5d;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line-strong);
+      padding: 36px 0;
+      font-size: 14px;
+      color: #6d6055;
+    }
+
+    .footer-note {
+      color: #8c7f72;
+      font-size: 12px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .media-wrap,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .header-inner {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(var(--max), calc(100% - 28px));
+      }
+
+      .section,
+      .hero-grid {
+        padding-top: 56px;
+        padding-bottom: 56px;
+      }
+
+      .brand-title {
+        font-size: 18px;
+      }
+
+      .section-title {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-mark">唐</div>
+        <div>
+          <div class="brand-title">唐斌的GPTs</div>
+          <div class="brand-subtitle">实验网站</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#home">主页</a>
+        <a href="#work">我们的事工</a>
+        <a href="#ai-course">神学课程 AI 化</a>
+        <a href="#history">事工回顾</a>
+        <a href="#media">影音资源</a>
+        <a href="#contact">联系我们</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill">实验网站</div>
+          <h1>塑造自我 · 学习成长 · 引导他人</h1>
+          <p>
+            这里先按你给的参考网站风格做成一个完整静态版。现在只把标题改成“唐斌的GPTs”，其他内容和结构保持不变，适合作为实验网站直接上传到 GitHub 使用。
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#work">查看内容</a>
+            <a class="btn btn-secondary" href="#media">查看影音资源</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="placeholder">
+            <div>
+              <div style="font-size: 18px; font-weight: 600;">首页主图区域</div>
+              <div style="margin-top: 8px; font-size: 14px;">后面可替换为你自己的横幅图片或事工照片</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section">
+      <div class="container">
+        <h2 class="section-title">我们的事工</h2>
+        <p class="section-desc">
+          这里可以按照原站方式展示当前主要事工，例如主日聚会、牧者关顾、课程培训、线上资源等。
+        </p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="eyebrow">Ministry</div>
+            <h3>北京时间每主日 Zoom 崇拜</h3>
+            <p>在这里补充这项事工的说明文字、时间安排、参与方式和相关链接。</p>
+          </article>
+          <article class="card">
+            <div class="eyebrow">Ministry</div>
+            <h3>牧者关顾与陪伴</h3>
+            <p>在这里补充这项事工的说明文字、服事对象、参与方式和联络信息。</p>
+          </article>
+          <article class="card">
+            <div class="eyebrow">Ministry</div>
+            <h3>神学课程与资源整理</h3>
+            <p>在这里补充课程简介、资料归档、AI 工具使用方式和后续扩展计划。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai-course" class="section alt">
+      <div class="container grid-2">
+        <div>
+          <h2 class="section-title">神学课程 AI 化</h2>
+          <p class="section-desc">
+            这个版块可用于介绍课程数字化、AI 检索、问答、音视频整理、课程资料归档等内容。
+          </p>
+        </div>
+        <div class="card">
+          <div class="feature-list">
+            <div>• 课程目录</div>
+            <div>• 逐课笔记</div>
+            <div>• 音频与视频资源</div>
+            <div>• AI 辅助检索与问答</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="history" class="section">
+      <div class="container">
+        <h2 class="section-title">事工回顾</h2>
+        <p class="section-desc">
+          按原站的思路，用编号 + 标题 + 简介的方式展示过往课程、退修会、讲座与活动记录。
+        </p>
+        <div class="history-list">
+          <article class="card">
+            <div class="history-no">01</div>
+            <h3>圣经神学课程（第一期）</h3>
+            <p>可在这里放课程主题、讲员介绍、分课标题与相关资源。</p>
+          </article>
+          <article class="card">
+            <div class="history-no">02</div>
+            <h3>圣经神学课程（第二期）</h3>
+            <p>可在这里继续放系列课程内容，并附音频、视频与下载链接。</p>
+          </article>
+          <article class="card">
+            <div class="history-no">03</div>
+            <h3>教会领袖退修会</h3>
+            <p>可在这里展示退修会主题、讲员名单、聚会简介与资源入口。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="media" class="section alt">
+      <div class="container">
+        <h2 class="section-title">音频与视频资源</h2>
+        <p class="section-desc">
+          按你的要求，这里已经预留了点击播放和下载功能。后面只需要把真实的 mp3 / mp4 地址替换进去即可。
+        </p>
+        <div class="media-wrap">
+          <article class="card">
+            <div class="eyebrow">Audio</div>
+            <h3>课程录音示例</h3>
+            <p>示例讲员</p>
+            <audio controls>
+              <source src="media/sample-audio.mp3" type="audio/mpeg" />
+              您的浏览器不支持音频播放。
+            </audio>
+            <div class="actions">
+              <a class="btn btn-secondary" href="media/sample-audio.mp3" download="sample-audio.mp3">下载资源</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="eyebrow">Video</div>
+            <h3>课程录像示例</h3>
+            <p>示例讲员</p>
+            <video controls>
+              <source src="media/sample-video.mp4" type="video/mp4" />
+              您的浏览器不支持视频播放。
+            </video>
+            <div class="actions">
+              <a class="btn btn-secondary" href="media/sample-video.mp4" download="sample-video.mp4">下载资源</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div>
+          <h2 class="section-title">联系我们</h2>
+          <p class="section-desc">
+            这里可以按原站方式放团队成员、联系邮箱、留言表单与支持奉献信息。
+          </p>
+          <div class="contact-lines">
+            <p>邮箱：your@email.com</p>
+            <p>电话：123-456-7890</p>
+            <p>地址：在这里填写机构地址</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-grid">
+            <input type="text" placeholder="First Name" />
+            <input type="text" placeholder="Last Name" />
+            <input type="email" placeholder="Email" />
+            <textarea placeholder="Message"></textarea>
+            <button class="btn btn-primary" type="button">Send</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div style="font-weight: 600;">我们的异象</div>
+      <div style="margin-top: 8px; max-width: 760px;">帮助华人教会因应现在与未来的需要，培养良善、忠心、有见识的仆人领袖。</div>
+      <div class="footer-note">© 2026 唐斌的GPTs · 实验网站</div>
+    </div>
+  </footer>
+</body>
+</html>
